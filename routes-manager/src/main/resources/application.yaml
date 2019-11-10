@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+    hibernate:
+      ddl-auto: validate
+      use-new-id-generator-mappings: false
+    properties:
+      hibernate:
+        show_sql: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog.xml
