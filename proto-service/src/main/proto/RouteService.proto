@@ -1,0 +1,45 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.rumata.routes.proto;
+
+message Empty {}
+
+message StatusResponse {
+    bool success = 1;
+    string exception = 2;
+}
+
+message RenameStationRequest {
+    string oldName = 1;
+    string newName = 2;
+}
+
+message Station {
+    string name = 1;
+}
+
+message Stations {
+    repeated Station stations = 1;
+}
+
+message Route {
+    string station1Name = 1;
+    string station2Name = 2;
+    double cost = 3;
+}
+
+message Routes {
+    repeated Route routes = 1;
+}
+
+service RoutesService {
+    rpc allStations(Empty) returns (Stations);
+    rpc addStation(Station) returns (StatusResponse);
+    rpc renameStation(RenameStationRequest) returns (StatusResponse);
+    rpc removeStation(Station) returns (StatusResponse);
+
+    rpc stationRoutes(Station) returns (Routes);
+    rpc addRoute(Route) returns (StatusResponse);
+    rpc changeRouteCost(Route) returns (StatusResponse);
+    rpc removeRoute(Route) returns (StatusResponse);
+}

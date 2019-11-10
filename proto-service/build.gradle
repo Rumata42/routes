@@ -1,0 +1,37 @@
+plugins {
+    id 'com.google.protobuf' version '0.8.8'
+    id 'maven'
+    id 'java'
+}
+
+group 'com.rumata.routes'
+version = '0.1.0'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.10.0"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.25.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+dependencies {
+    implementation 'io.grpc:grpc-netty-shaded:1.25.0'
+    implementation 'io.grpc:grpc-protobuf:1.25.0'
+    implementation 'io.grpc:grpc-stub:1.25.0'
+
+    compileOnly 'javax.annotation:jsr250-api:1.0' //fix bug of compilation generated code
+}
