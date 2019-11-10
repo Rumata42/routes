@@ -2,6 +2,7 @@ package com.rumata.routes.searcher.service.impl;
 
 import com.rumata.routes.searcher.domain.entity.Route;
 import com.rumata.routes.searcher.service.interfaces.RoutesMapService;
+import lombok.val;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,35 +16,35 @@ class RoutesMapServiceImplTest {
 
     @Test
     void testSingleStation() {
-        var service = serviceWithMockData(new Route(STATION));
-        var routes = service.routesMap().routesForStation(STATION);
+        val service = serviceWithMockData(new Route(STATION));
+        val routes = service.routesMap().routesForStation(STATION);
         Assertions.assertTrue(routes.isEmpty());
     }
 
     @Test
     void testUnknownStation() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            var service = serviceWithMockData(new Route(STATION));
+            val service = serviceWithMockData(new Route(STATION));
             service.routesMap().routesForStation("unknown station");
         });
     }
 
     @Test
     void testOutgoingRoute() {
-        var destination = "One another station";
-        var cost = BigDecimal.valueOf(1.0);
-        var service = serviceWithMockData(new Route(STATION, destination, cost));
-        var routes = service.routesMap().routesForStation(STATION);
+        val destination = "One another station";
+        val cost = BigDecimal.valueOf(1.0);
+        val service = serviceWithMockData(new Route(STATION, destination, cost));
+        val routes = service.routesMap().routesForStation(STATION);
         Assertions.assertEquals(1, routes.size());
         Assertions.assertEquals(cost, routes.get(destination));
     }
 
     @Test
     void testIncomingRoute() {
-        var destination = "One another station";
-        var cost = BigDecimal.valueOf(1.0);
-        var service = serviceWithMockData(new Route(destination, STATION, cost));
-        var routes = service.routesMap().routesForStation(STATION);
+        val destination = "One another station";
+        val cost = BigDecimal.valueOf(1.0);
+        val service = serviceWithMockData(new Route(destination, STATION, cost));
+        val routes = service.routesMap().routesForStation(STATION);
         Assertions.assertEquals(1, routes.size());
         Assertions.assertEquals(cost, routes.get(destination));
     }

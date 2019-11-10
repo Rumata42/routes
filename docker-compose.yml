@@ -1,0 +1,38 @@
+version: "3"
+services:
+  mariadb:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: routes
+      MYSQL_USER: routes
+      MYSQL_PASSWORD: change.me
+      MYSQL_ROOT_PASSWORD: change.me
+
+  routes-manager:
+    image: routes-manager
+    depends_on:
+      - mariadb
+    ports:
+      - "6565:6565"
+    environment:
+      DB_PORT: 3306
+      DB_HOST: mariadb
+      DB_NAME: routes
+      DB_USERNAME: routes
+      DB_PASSWORD: change.me
+
+  routes-search:
+    image: routes-search
+    depends_on:
+      - mariadb
+      - routes-manager
+    ports:
+      - "8080:8080"
+    environment:
+      DB_PORT: 3306
+      DB_HOST: mariadb
+      DB_NAME: routes
+      DB_USERNAME: routes
+      DB_PASSWORD: change.me

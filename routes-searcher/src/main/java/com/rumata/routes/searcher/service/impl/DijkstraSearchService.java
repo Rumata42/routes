@@ -36,7 +36,7 @@ public class DijkstraSearchService implements SearchService {
         private final Map<String, Node> nodes = new HashMap<>();
 
         Graph(RoutesMap routesMap, String start) {
-            var currentNode = new Node(start, BigDecimal.ZERO);
+            Node currentNode = new Node(start, BigDecimal.ZERO);
             nodes.put(start, currentNode);
 
             while (currentNode != null) {

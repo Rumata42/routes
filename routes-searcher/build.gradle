@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.rumata.routes'
 version = '0.1.0'
-sourceCompatibility = '11'
+sourceCompatibility = 1.8
 
 configurations {
 	compileOnly {
@@ -21,12 +21,15 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	implementation "org.mariadb.jdbc:mariadb-java-client"
+
+	compileOnly "org.projectlombok:lombok"
+	testCompileOnly "org.projectlombok:lombok"
+	annotationProcessor "org.projectlombok:lombok"
+	testAnnotationProcessor "org.projectlombok:lombok"
 }
 
 test {

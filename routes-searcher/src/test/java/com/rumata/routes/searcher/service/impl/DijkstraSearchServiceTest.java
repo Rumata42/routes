@@ -4,6 +4,7 @@ import com.rumata.routes.searcher.domain.entity.Route;
 import com.rumata.routes.searcher.service.interfaces.RoutesMap;
 import com.rumata.routes.searcher.service.interfaces.RoutesMapService;
 import com.rumata.routes.searcher.service.interfaces.SearchService;
+import lombok.val;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ class DijkstraSearchServiceTest {
 
     @Test
     void testSingleStation() {
-        var routesMapService = new MockRoutesMapService();
+        val routesMapService = new MockRoutesMapService();
         routesMapService.add("one", emptyMap());
 
         SearchService service = new DijkstraSearchService(routesMapService);
@@ -29,7 +30,7 @@ class DijkstraSearchServiceTest {
 
     @Test
     void testNoStation() {
-        var routesMapService = new MockRoutesMapService();
+        val routesMapService = new MockRoutesMapService();
         routesMapService.add("one", emptyMap());
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -40,8 +41,8 @@ class DijkstraSearchServiceTest {
 
     @Test
     void testTwoStations() {
-        var cost = BigDecimal.valueOf(1.0);
-        var routesMapService = new MockRoutesMapService();
+        val cost = BigDecimal.valueOf(1.0);
+        val routesMapService = new MockRoutesMapService();
         routesMapService.add("one", Collections.singletonMap("two", cost));
         routesMapService.add("two", Collections.singletonMap("one", cost));
 
@@ -51,7 +52,7 @@ class DijkstraSearchServiceTest {
 
     @Test
     void testTwoIsolatedStations() {
-        var routesMapService = new MockRoutesMapService();
+        val routesMapService = new MockRoutesMapService();
         routesMapService.add("one", emptyMap());
         routesMapService.add("two", emptyMap());
 
@@ -61,7 +62,7 @@ class DijkstraSearchServiceTest {
 
     @Test
     void testSearchByComplexMap() {
-        var routesMapService = new RoutesMapServiceImpl(() -> Arrays.asList(
+        val routesMapService = new RoutesMapServiceImpl(() -> Arrays.asList(
                 new Route("A", "C", 5.0),
                 new Route("B", "C", 2.0),
                 new Route("B", "D", 5.0),
@@ -96,7 +97,7 @@ class DijkstraSearchServiceTest {
         @Override
         public RoutesMap routesMap() {
             return name -> {
-                var routesForStation = routes.get(name);
+                val routesForStation = routes.get(name);
                 if (routesForStation == null) throw new IllegalArgumentException();
                 return routesForStation;
             };
