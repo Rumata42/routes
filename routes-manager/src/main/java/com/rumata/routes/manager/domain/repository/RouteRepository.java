@@ -39,10 +39,10 @@ public interface RouteRepository extends JpaRepository<Route, Long>, JpaSpecific
      */
     default Route requiredByStations(Station station1, Station station2) {
         Optional<Route> route = findByStation1AndStation2(station1, station2);
-        if (route.isEmpty()) {
+        if (!route.isPresent()) {
             route = findByStation1AndStation2(station2, station1);
         }
-        if (route.isEmpty()) {
+        if (!route.isPresent()) {
             throw new IllegalInputException("Routes between '" + station1.getName() + "' and '" + station2.getName() + "' doesn't exist.");
         }
         return route.get();

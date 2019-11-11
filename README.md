@@ -1,26 +1,27 @@
-Service for management of stations and routes between them. And for searching the shortest paths between the stations.
+Service to manageme stations and routes between them. And to find shortest paths between the stations.
 
 Include:
 * proto-service - protobuf service notation, generated java stubs
-* routes-management - server implementation of protobuf services, serves CRUD operations with stations and routes
+* routes-management - server implementation for protobuf services, serves CRUD operations with stations and routes
 * routes-searcher - REST server for searching paths between stations
+* docker-compose file
 
 #### Build
 
 ##### Manager
-At first need to generate protobuf stubs classes in proto-service lib:
+Firstly need to generate protobuf stubs classes in proto-service lib:
 ```
 cd proto-service
 ./gradlew install
 ```
-Than build the routes-manager project:
+Then build the routes-manager project:
 ```
 cd routes-manager
 ./gradlew build
 ```
-Than to build as docker image:
+Then to build as docker image:
 ```
-sudo docker build -t routes-manager:latest -f Dockerfile .
+docker build -t routes-manager:latest -f Dockerfile .
 ```
 
 ##### Searcher
@@ -29,9 +30,9 @@ To build the routes-searcher project:
 cd routes-searcher
 ./gradlew build
 ```
-Than to build as docker image:
+Then to build as docker image:
 ```
-sudo docker build -t routes-search:latest -f Dockerfile .
+docker build -t routes-search:latest -f Dockerfile .
 ```
 
 #### Run

@@ -20,7 +20,7 @@ public interface StationRepository extends JpaRepository<Station, Long>, JpaSpec
 
     default Station requiredByName(String name) {
         val station = findByName(name);
-        if (station.isEmpty()) {
+        if (!station.isPresent()) {
             throw new IllegalInputException("Station '" + name + "' doesn't exist.");
         }
         return station.get();
