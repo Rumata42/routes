@@ -1,0 +1,11 @@
+version: "3"
+services:
+  mariadb-test:
+    image: mariadb
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: routes
+      MYSQL_USER: routes
+      MYSQL_PASSWORD: change.me
+      MYSQL_ROOT_PASSWORD: change.me

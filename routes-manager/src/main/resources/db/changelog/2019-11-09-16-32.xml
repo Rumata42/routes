@@ -24,10 +24,10 @@
                 <constraints nullable="false"/>
             </column>
             <column name="station1_id" type="BIGINT">
-                <constraints nullable="false" references="station(id)" foreignKeyName="route_fk_station1"/>
+                <constraints nullable="false" references="station(id)" foreignKeyName="route_fk_station1" deleteCascade="true"/>
             </column>
             <column name="station2_id" type="BIGINT">
-                <constraints nullable="false" references="station(id)" foreignKeyName="route_fk_station2"/>
+                <constraints nullable="false" references="station(id)" foreignKeyName="route_fk_station2" deleteCascade="true"/>
             </column>
         </createTable>
 

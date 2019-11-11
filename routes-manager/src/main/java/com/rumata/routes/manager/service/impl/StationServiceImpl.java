@@ -45,6 +45,9 @@ public class StationServiceImpl implements StationService {
     @Transactional
     public void renameStation(String oldName, String newName) {
         val station = stationRepository.requiredByName(oldName);
+        if (stationRepository.countByName(newName) > 0) {
+            throw new IllegalInputException("Station '" + newName + "' already exists.");
+        }
         station.setName(newName);
         stationRepository.save(station);
         log.debug("Station '{}' has been renamed to '{}'.", oldName, newName);
